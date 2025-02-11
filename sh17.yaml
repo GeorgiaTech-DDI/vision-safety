@@ -1,19 +1,24 @@
 # Dataset path
-path: ../datasets/sh17  # dataset root dir
-train: train/images     # train images (relative to 'path')
-val: val/images         # val images (relative to 'path')
+path: ../datasets/sh17
+train: train/images
+val: val/images
 
 # Classes
 names:
-  0: shirt
-  1: sweater
-  2: jacket
-  3: vest
-  4: coat
-  5: t-shirt
-  6: pants
-  7: shorts
-  8: skirt
-  9: dress
-  10: jumpsuit
-  11: suit
+  0: person
+  1: head
+  2: face
+  3: glasses
+  4: face_mask_medical
+  5: face_guard
+  6: ear
+  7: earmuffs
+  8: hands
+  9: gloves
+  10: foot
+  11: shoes
+  12: safety_vest
+  13: tools
+  14: helmet
+  15: medical_suit
+  16: safety_suit

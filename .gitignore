@@ -1,0 +1,6 @@
+.venv/
+datasets/
+runs/
+.ipynb_checkpoints/
+*.ipynb
+sh17.yaml
