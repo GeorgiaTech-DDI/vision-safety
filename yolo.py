@@ -1,29 +1,35 @@
-from ultralytics import YOLO
 import cv2
+from ultralytics import YOLO
 
-# Load your trained model instead of the default one
-model = YOLO("runs/detect/train/weights/best.pt")
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Error: Could not open camera.")
-    exit()
-
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Error: Failed to capture image.")
-        break
+def run_webcam_detection():
+    # Load the trained model - adjust path based on your training output
+    model = YOLO('runs/detect/train/weights/best.pt')
     
-    # Add confidence threshold and specific classes
-    results = model.predict(
-        frame,
-        conf=0.5,  # Confidence threshold
-        show=True
-    )
+    # Initialize webcam
+    cap = cv2.VideoCapture(0)
     
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    while cap.isOpened():
+        success, frame = cap.read()
+        
+        if success:
+            # Run inference on the frame
+            results = model(frame)
+            
+            # Visualize the results on the frame
+            annotated_frame = results[0].plot()
+            
+            # Display the annotated frame
+            cv2.imshow("PPE Detection", annotated_frame)
+            
+            # Break the loop if 'q' is pressed
+            if cv2.waitKey(1) & 0xFF == ord("q"):
+                break
+        else:
+            break
+    
+    # Release resources
+    cap.release()
+    cv2.destroyAllWindows()
 
-cap.release()
-cv2.destroyAllWindows()
+if __name__ == "__main__":
+    run_webcam_detection()
