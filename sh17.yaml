@@ -1,7 +1,7 @@
 # Dataset path
-path: ../datasets/sh17
-train: train/images
-val: val/images
+path: '/Users/chena/Documents/Projects/Georgia Tech/datasets/sh17'
+train: '/Users/chena/Documents/Projects/Georgia Tech/datasets/sh17/train/images'
+val: '/Users/chena/Documents/Projects/Georgia Tech/datasets/sh17/val/images'
 
 # Classes
 names:
