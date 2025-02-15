@@ -14,8 +14,8 @@ def train_model():
         epochs=10,
         imgsz=640,
         batch=16,
-        project=current_dir,  # Set project directory to current directory
-        name='runs/detect/train',  # Subfolder structure
+        project=current_dir,
+        name='runs/detect/train',
         patience=2,
         save=True
     )

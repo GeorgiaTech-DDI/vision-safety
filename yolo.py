@@ -2,7 +2,6 @@ import cv2
 from ultralytics import YOLO
 
 def run_webcam_detection():
-    # Load the trained model - adjust path based on your training output
     model = YOLO('runs/detect/train/weights/best.pt')
     
     # Initialize webcam
