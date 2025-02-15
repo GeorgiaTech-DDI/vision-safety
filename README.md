@@ -8,8 +8,8 @@ Download the [dataset](https://www.kaggle.com/datasets/mugheesahmad/sh17-dataset
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # For Unix/MacOS
-# OR
-.venv\Scripts\activate  # For Windows
+                           # OR
+.venv\Scripts\activate     # For Windows
 ```
 
 ## Install dependencies:
@@ -19,6 +19,19 @@ pip install "ultralytics<=8.3.40" opencv-python scikit-learn
 ```
 
 ## Project structure:
+
+```text
+vision-safety/
+├── .venv/
+├── datasets/
+│   └── sh17/
+├── script.py       # Dataset preparation script
+├── train.py        # Model training script
+├── verify_paths.py # Verify the paths within the datasets directory
+└── yolo.py         # Real-time detection script
+```
+
+Structure the datasets directory as follows:
 
 ```text
 datasets/
@@ -58,6 +71,12 @@ names: ['Person',
         'Helmet', 
         'Medical-suit', 
         'Safety-suit']
+```
+
+## Split the data into an 80:20 training and validation ratio:
+
+```bash
+python script.py
 ```
 
 ## Train the model:
