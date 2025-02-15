@@ -1,7 +1,5 @@
 # Vision-Based Safety
 
----
-
 ## Initial Setup
 Download the [dataset](https://www.kaggle.com/datasets/mugheesahmad/sh17-dataset-for-ppe-detection/data). 
 
@@ -79,7 +77,7 @@ python -c "from ultralytics import YOLO; model = YOLO('runs/detect/train/weights
 To run real-time PPE detection using your webcam:
 
 ```bash
-python webcam.py
+python yolo.py
 ```
 Press 'q' to quit the application.
 
