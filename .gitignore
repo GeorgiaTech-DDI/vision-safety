@@ -2,3 +2,7 @@
 datasets/
 runs/
 *.pt
+*.DS_Store
+*.jpg
+*.csv
+*.json
