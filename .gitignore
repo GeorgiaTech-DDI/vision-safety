@@ -4,5 +4,5 @@ runs/
 *.pt
 *.DS_Store
 *.jpg
-*.csv
+fashion-dataset/
 *.json
