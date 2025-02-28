@@ -1,8 +1,8 @@
 .venv/
-datasets/
 runs/
 *.pt
 *.DS_Store
 *.jpg
 fashion-dataset/
 *.json
+typeName_data.csv
