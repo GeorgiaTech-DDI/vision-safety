@@ -1,6 +1,6 @@
 .venv/
 datasets/
 datasets-min/
-runs/
-*.out
 *.pt
+train_*.jpg
+val_*.jpg
