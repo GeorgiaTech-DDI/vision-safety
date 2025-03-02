@@ -1,45 +1,63 @@
-"""
-Training Data Extraction Script for YOLOv8
-------------------------------------------
-This script:
-1. Loads `styles.csv` and ensures the dataset is not empty.
-2. Extracts `articleType` (clothing category) and assigns class IDs.
-3. Saves processed data to `typeName_data.csv`.
-4. Creates YOLO `.txt` label files in `fashion-dataset/labels/`.
-"""
-
 import os
+import shutil
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
-dataset_path = "fashion-dataset"
-csv_file = os.path.join(dataset_path, "styles.csv")
-labels_dir = os.path.join(dataset_path, "labels")
+# Define dataset paths
+dataset_path = "datasets"
+label_dir = os.path.join(dataset_path, "labels")
+train_label_dir = os.path.join(label_dir, "train")
+val_label_dir = os.path.join(label_dir, "val")
+csv_file = os.path.join(dataset_path, "updated_styles.csv")
 
-os.makedirs(labels_dir, exist_ok=True)
+# Ensure label directories exist
+os.makedirs(train_label_dir, exist_ok=True)
+os.makedirs(val_label_dir, exist_ok=True)
 
-df = pd.read_csv(csv_file)
+# **🚨 Step 1: Delete old label files**
+for folder in [train_label_dir, val_label_dir]:
+    for file in os.listdir(folder):
+        file_path = os.path.join(folder, file)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
 
-if df.empty:
-    raise ValueError("🚨 ERROR: Dataset is empty! Check styles.csv filtering.")
+# print("🗑️ Deleted old label files in train/ and val/.")
 
-required_columns = {"filename", "articleType", "id", "image_path", "class_id"}
+df = pd.read_csv(csv_file, nrows=701)  # Load first 701 rows
+
+# Ensure required columns exist
+required_columns = {"filename", "articleType", "id", "class_id", "x_center", "y_center", "width", "height"}
 if not required_columns.issubset(df.columns):
     raise ValueError(f"🚨 ERROR: Missing required columns! Found: {df.columns}")
 
-df = df.dropna(subset=["filename", "articleType", "id", "class_id"])
+# Remove NaN values
+df = df.dropna(subset=["filename", "articleType", "id", "class_id", "x_center", "y_center", "width", "height"])
 
-print("✅ Sample Data Before Processing:")
-print(df.head())
+valid_class_ids = set(range(15))
+df = df[df["class_id"].isin(valid_class_ids)]
 
-output_csv = "typeName_data.csv"
-df.to_csv(output_csv, index=False)
-print(f"✅ Processed dataset saved to: {output_csv}")
+class_mapping_path = os.path.join(dataset_path, "class_mapping.txt")
+class_mapping = df[["class_id", "articleType"]].drop_duplicates().set_index("class_id").to_dict()["articleType"]
 
-for _, row in df.iterrows():
-    label_filename = f"{row['id']}.txt"
-    label_path = os.path.join(labels_dir, label_filename)
+with open(class_mapping_path, "w") as f:
+    for cls_id, cls_name in class_mapping.items():
+        f.write(f"{cls_id}: {cls_name}\n")
 
-    with open(label_path, "w") as f:
-        f.write(f"{int(row['class_id'])}\n")
+# print("✅ Class mapping saved in class_mapping.txt")
 
-print(f"✅ YOLO labels saved in: {labels_dir}/")
+train_df, val_df = train_test_split(df, test_size=0.2, random_state=42)
+
+def save_labels(df_split, label_folder):
+    for _, row in df_split.iterrows():
+        label_filename = f"{row['id']}.txt"
+        label_path = os.path.join(label_folder, label_filename)
+
+        label_content = f"{int(row['class_id'])} {row['x_center']} {row['y_center']} {row['width']} {row['height']}\n"
+
+        with open(label_path, "w") as f:
+            f.write(label_content)
+
+save_labels(train_df, train_label_dir)
+save_labels(val_df, val_label_dir)
+
+# print("✅ YOLO labels generated successfully in train/ and val/")

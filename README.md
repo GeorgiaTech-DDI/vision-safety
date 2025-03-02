@@ -65,12 +65,12 @@ fashion-dataset/
 The `data.yaml` file defines the dataset structure for YOLOv8 training:
 
 ```yaml
-path: ./fashion-dataset
-train: images/train
-val: images/val
+ath: path/to/datasets
+train: path/to/datasets/images/train
+val: path/to/datastes/images/val
 
-nc: 16
-names: ["Short sleeve", "Long sleeve", "Open toe", "Closed toe", "Bag", "Hat", "Socks", "Jewelry", "Watch", "Jacket", "Hoodie", "Dress", "Shorts", "Pants", "Scarf", "Glasses"]
+nc: 15
+names: ["Short sleeve", "Long sleeve", "Open toe", "Closed toe", "Bag", "Hat", "Socks", "Jewelry", "Watch", "Jacket", "Dress", "Shorts", "Pants", "Scarf", "Glasses"]
 ```
 
 ---
@@ -79,7 +79,7 @@ names: ["Short sleeve", "Long sleeve", "Open toe", "Closed toe", "Bag", "Hat", "
 Train the YOLOv8 model using the dataset:
 
 ```bash
-yolo task=detect mode=train model=yolov8n.pt data=fashion-dataset/data.yaml epochs=50 imgsz=640
+yolo task=detect mode=train model=yolov8n.pt data=datasets/data.yaml epochs=50 imgsz=640
 ```
 
 This will:

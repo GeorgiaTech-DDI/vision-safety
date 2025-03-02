@@ -5,4 +5,5 @@ runs/
 *.jpg
 fashion-dataset/
 *.json
+datasets/
 typeName_data.csv

@@ -18,7 +18,7 @@ import shutil
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-dataset_path = "fashion-dataset"
+dataset_path = "datasets"
 image_dir = os.path.join(dataset_path, "images")
 label_dir = os.path.join(dataset_path, "labels")
 csv_file = os.path.join(dataset_path, "styles.csv")
@@ -32,19 +32,24 @@ df = pd.read_csv(csv_file, nrows=701)
 
 if "filename" not in df.columns or "articleType" not in df.columns:
     raise ValueError("CSV file must contain 'filename' and 'articleType' columns.")
-
+# Convert articleType to string and remove NaN values
 df["articleType"] = df["articleType"].astype(str).str.strip()
-df = df[df["articleType"].notna()]  # Remove rows where `articleType` is NaN
+df = df[df["articleType"].notna()]  # Drop rows where articleType is NaN
 
-df = df[~df["articleType"].str.startswith("http")]  # Ignore URLs
-df = df[df["articleType"] != "nan"]  # Ignore NaN values stored as strings
+# **Remove entries where articleType is missing or incorrectly assigned as "0"**
+df = df[df["articleType"] != "0"]
 
-df["id"] = df["filename"].str.replace(".jpg", "", regex=False)
+# Create a mapping of articleType to numeric class ID (starting at 1)
+unique_classes = sorted(df["articleType"].dropna().unique())  
+class_mapping = {cls: idx + 1 for idx, cls in enumerate(unique_classes)}  # Start at 1
+df["class_id"] = df["articleType"].map(class_mapping)
 
-unique_classes = sorted(df["articleType"].dropna().unique()) 
-class_mapping = {cls: idx + 1 for idx, cls in enumerate(unique_classes)}
-df["class_id"] = df["articleType"].map(class_mapping)  # Assign correct class IDs
+# **Print filenames where class_id ≠ 0**
+valid_images = df[df["class_id"] != 0][["filename", "class_id"]]
+print("\n✅ Files with class_id ≠ 0:")
+print(valid_images.to_string(index=False))  # Print without index
 
+# Save corrected class mapping
 class_mapping_path = os.path.join(dataset_path, "class_mapping.txt")
 with open(class_mapping_path, "w") as f:
     for cls, idx in class_mapping.items():
