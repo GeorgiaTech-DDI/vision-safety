@@ -1,8 +1,13 @@
 .venv/
-*.pt
+# *.pt
 *.DS_Store
-datasets/
+*.jpg
 *.json
+# runs/
+.venv/
 datasets/
-backup/
-script.py
+old-datasets/
+fashion-dataset.zip
+typeName_data.csv
+yolo11n.pt
+yolov8n.pt
