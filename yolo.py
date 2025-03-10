@@ -12,7 +12,7 @@ This script:
 import cv2
 from ultralytics import YOLO
 
-model_path = "runs/detect/train/weights/best.pt"  # Path to the trained model
+model_path = "runs/detect/train/weights/best.pt"
 model = YOLO(model_path)
 
 cap = cv2.VideoCapture(0)

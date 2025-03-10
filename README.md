@@ -7,7 +7,7 @@ This project utilizes **YOLOv8** for **real-time clothing detection** in images 
 
 ## **🚀 Initial Setup**
 ### **Download the Dataset**
-Download the [Fashion Product Images Dataset](https://www.kaggle.com/datasets/paramaggarwal/fashion-product-images-dataset) and place it inside the `fashion-dataset/` directory.
+Download the [Datasets](https://drive.google.com/file/d/1tUPgF2-K9HhkK0eiXupadHky3VEm0pgL/view?usp=sharing) and place it inside the `vision-safety` directory.
 
 ### **Create and Activate a Virtual Environment**
 ```bash
@@ -28,49 +28,9 @@ pip install -r requirements.txt
 ```text
 vision-safety/
 ├── .venv/                  # Virtual environment
-├── fashion-dataset/        # Dataset directory
-├── script.py               # Dataset preprocessing script
-├── train.py                # Model training script
+├── datasets/               # Dataset directory
 ├── testing.py              # Model testing script
 └── README.md               # Project documentation
-```
-
----
-
-## **📌 Preparing the Dataset**
-Run the dataset preparation script to **organize images and labels** into YOLO format:
-
-```bash
-python script.py
-```
-
-After execution, the `fashion-dataset/` directory should be structured as follows:
-
-```text
-fashion-dataset/
-├── images/
-│   ├── train/          # Training images
-│   ├── val/            # Validation images
-├── labels/
-│   ├── train/          # YOLO labels for training images
-│   ├── val/            # YOLO labels for validation images
-├── class_mapping.txt   # Maps class IDs to clothing categories
-├── styles.csv          # Raw dataset metadata
-└── data.yaml           # YOLO dataset configuration
-```
-
----
-
-## **📜 data.yaml Structure**
-The `data.yaml` file defines the dataset structure for YOLOv8 training:
-
-```yaml
-ath: path/to/datasets
-train: path/to/datasets/images/train
-val: path/to/datastes/images/val
-
-nc: 15
-names: ["Short sleeve", "Long sleeve", "Open toe", "Closed toe", "Bag", "Hat", "Socks", "Jewelry", "Watch", "Jacket", "Dress", "Shorts", "Pants", "Scarf", "Glasses"]
 ```
 
 ---
@@ -83,7 +43,7 @@ yolo task=detect mode=train model=yolov8n.pt data=datasets/data.yaml epochs=50 i
 ```
 
 This will:
-- Train YOLOv8 on the **fashion dataset**.
+- Train YOLOv8 on the **dataset**.
 - Save the **trained model** inside the `runs/detect/train/weights/` directory.
 
 ---
@@ -114,20 +74,8 @@ python yolo.py
 The model is trained to recognize the following **clothing categories**:
 - Short sleeve
 - Long sleeve
-- Open toe
-- Closed toe
-- Bag
-- Hat
-- Socks
 - Jewelry
 - Watch
-- Jacket
-- Hoodie
-- Dress
-- Shorts
-- Pants
-- Scarf
-- Glasses
 
 ---
 

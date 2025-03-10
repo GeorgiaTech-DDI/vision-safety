@@ -6,4 +6,5 @@ runs/
 fashion-dataset/
 *.json
 datasets/
-typeName_data.csv
+backup/
+script.py
