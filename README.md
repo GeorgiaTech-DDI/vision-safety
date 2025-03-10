@@ -10,6 +10,7 @@ This project utilizes **YOLOv8** for **real-time clothing detection** in images 
 Download the [Datasets](https://drive.google.com/file/d/1tUPgF2-K9HhkK0eiXupadHky3VEm0pgL/view?usp=sharing) and place it inside the `vision-safety` directory.
 
 ### **Create and Activate a Virtual Environment**
+### only necessary if not already using a conda environment
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # For Unix/MacOS
@@ -21,6 +22,11 @@ source .venv/bin/activate  # For Unix/MacOS
 ```bash
 pip install -r requirements.txt
 ```
+
+---
+
+### **Update dataset.yaml**
+Update 'path', 'train', and 'val' with the correct local absolute path to those directories
 
 ---
 
@@ -39,7 +45,7 @@ vision-safety/
 Train the YOLOv8 model using the dataset:
 
 ```bash
-yolo task=detect mode=train model=yolov8n.pt data=datasets/data.yaml epochs=50 imgsz=640
+yolo task=detect mode=train model=yolov8n.pt data=datasets/dataset.yaml epochs=50 imgsz=640
 ```
 
 This will:

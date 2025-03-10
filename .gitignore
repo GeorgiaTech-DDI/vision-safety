@@ -2,8 +2,7 @@
 runs/
 *.pt
 *.DS_Store
-*.jpg
-fashion-dataset/
+datasets/
 *.json
 datasets/
 backup/
