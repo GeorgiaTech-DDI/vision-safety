@@ -70,7 +70,7 @@ python yolo.py
 
 ---
 
-## **👕 Classes Detected (16 Total)**
+## **👕 Classes Detected (4 Total)**
 The model is trained to recognize the following **clothing categories**:
 - Short sleeve
 - Long sleeve
