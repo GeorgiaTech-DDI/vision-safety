@@ -25,11 +25,6 @@ pip install -r requirements.txt
 
 ---
 
-### **Update dataset.yaml**
-Update 'path', 'train', and 'val' with the correct local absolute path to those directories
-
----
-
 ## **📂 Project Structure**
 ```text
 vision-safety/
@@ -38,6 +33,11 @@ vision-safety/
 ├── testing.py              # Model testing script
 └── README.md               # Project documentation
 ```
+
+---
+
+### **Update dataset.yaml**
+Update 'path', 'train', and 'val' with the correct local absolute path to those directories
 
 ---
 
