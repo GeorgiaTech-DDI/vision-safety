@@ -1,0 +1,10 @@
+Hi! This is a new dataset we (PPE team) are trying for safety goggles specifically. I tried running it on cpu so it's very slow (only ran 5 epochs overnight). Could you please run it? Let me know if anything is missing or needed additionally!
+
+Some dataset metrics:
+
+Total Images: 15,083
+Split: Train: 13,200 images (88%), Validation: 1,256 images (8%), Test: 627 images (4%)
+Classes: 'Safety_Goggles', 'No_Safety_Goggles'
+Model: YOLOv8
+Size: 640x640 pixels
+Augmentations: Flipping, Rotation, Cropping, Brightness Adjustments

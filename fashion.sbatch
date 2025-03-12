@@ -10,4 +10,4 @@
 
 module load anaconda3/2022.05.0.1 && conda activate /storage/ice-shared/vip-vx4/.conda/envs/llama
 cd /storage/ice-shared/vip-vx4/spring2025/vision-safety
-yolo task=detect mode=train model=yolov8n.pt data=fashion-dataset/data.yaml epochs=50 imgsz=640 patience=5
+yolo task=detect mode=train model=yolov8n.pt data=datasets/dataset.yaml epochs=50 imgsz=640
