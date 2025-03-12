@@ -20,8 +20,8 @@ def train_model():
 
     # Train the model with specified project directory
     results = model.train(
-        data=os.path.join(current_dir, "datasets-min/data.yaml"),
-        epochs=100,
+        data=os.path.join(current_dir, "old-datasets/goggles.yolov8/data.yaml"),
+        epochs=150,
         imgsz=640,
         batch=batch_size,
         project=current_dir,
