@@ -1,5 +1,4 @@
 .venv/
-runs/
 *.pt
 *.DS_Store
 datasets/
