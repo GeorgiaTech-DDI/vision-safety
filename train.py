@@ -18,14 +18,32 @@ Parameters:
 The script prints out the validation results after running the validation process on the model.
 '''
 
+from ultralytics import YOLO
+
 dataset_path = "datasets/dataset.yaml"
+model_path = "runs/detect/train/weights/best.pt"
 
-model = YOLO("best.pt")
+# Load the trained model
+model = YOLO(model_path)
 
+# Run validation
 results = model.val(
     data=dataset_path, 
     imgsz=640, 
     batch=16,
 )
 
-print(f"Validation Results: {results}")
+# Extract and print accuracy metrics
+metrics = results.results_dict  # Dictionary containing validation metrics
+mAP50 = metrics.get("metrics/mAP_50(B)", "N/A")  # mAP@0.5
+mAP5095 = metrics.get("metrics/mAP_50-95(B)", "N/A")  # mAP@0.5:0.95
+
+print(f"mAP@0.5: {mAP50:.4f}")  # Print mAP@0.5
+print(f"mAP@0.5:0.95: {mAP5095:.4f}")  # Print mAP@0.5:0.95
+
+
+
+
+
+
+

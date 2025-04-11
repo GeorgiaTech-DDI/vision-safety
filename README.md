@@ -7,7 +7,7 @@ This project utilizes **YOLOv8** for **real-time clothing detection** in images 
 
 ## **🚀 Initial Setup**
 ### **Download the Dataset**
-Download the [Datasets](https://drive.google.com/file/d/1tUPgF2-K9HhkK0eiXupadHky3VEm0pgL/view?usp=sharing) and place it inside the `vision-safety` directory.
+Download the [Datasets](https://drive.google.com/file/d/1hYG5pK8UvttUt7WSDmx97NzVpsvQz_jE/view?usp=sharing) and place it inside the `vision-safety` directory.
 
 ### **Create and Activate a Virtual Environment**
 ### only necessary if not already using a conda environment
